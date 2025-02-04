@@ -123,10 +123,13 @@ def serber_yield(E_n, E_d=40.0, deg=0.0, E_min=1.0, A=69.9E-3, w=26.6, R_E=1.0, 
 ###############
 if __name__=="__main__":
         E_inc = 35.0 # MeV
-        current = 2 # uA
+        current = 4 # uA
         dE = 1.0 # Energy grid spacing
-        x_list = np.arange(0,3,0.25) # target x range (mm)
-        y_list = np.arange(0,5,0.25) # target y range (mm)
+        x_dim = 3.0 # target width (mm)
+        y_dim = 5.0 # target height (mm)
+        z_dim = 25.0 # distance from Be foil to target (mm)
+        x_list = np.arange(0,x_dim,0.25) # target x range (mm)
+        y_list = np.arange(0,y_dim,0.25) # target y range (mm)
         Total_yield_list_pos = []  # list of yields to average over
         for x in x_list:
                 for y in y_list:
@@ -137,7 +140,8 @@ if __name__=="__main__":
                                 total_yield += np.average(serber_yield(E_range, E_inc, tht))
                         Total_yield_list_pos.append(total_yield)
         avg_yield = sum(Total_yield_list_pos)/len(Total_yield_list_pos)
-        fluence_per_hour = avg_yield * (current * 60 * 60) * 0.08  # fluence after 1-hr run at 2uA, 0.08 sr for 3x5mm target
+        solid_angle = (x_dim * y_dim / z_dim**2)  # steradians at target
+        fluence_per_hour = avg_yield * (current * 3600) * solid_angle  # fluence after 1-hr, based on solid angle at target
         time_to_1e14 = 1.0e+14 / fluence_per_hour * 60
         print("Time to 1E14 total fluence is {0:.0f} minutes.".format(time_to_1e14))
 
