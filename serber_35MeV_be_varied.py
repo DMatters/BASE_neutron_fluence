@@ -1,4 +1,4 @@
-#DM: Modified code below to varies angle over a 3x5mm target at 2.0cm from Be foil; incident deuteron energy 35 MeV; current 2uA; calculate time to achieve a fluence of 1E14 neutrons
+#DM: Modified code below to varies angle over a 3x5mm target at 2.5cm from Be foil; incident deuteron energy 35 MeV; current 4uA; calculate time to achieve a fluence of 1E14 neutrons
 
 #Python code for calculating neutron flux at a given angle for a given deuteron energy and breakup target (the sample provided is for 40 MeV deuterons on beryllium at 0°, but this can be easily modified).
 
